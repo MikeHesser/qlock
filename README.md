@@ -1,6 +1,6 @@
 # Qlock - Word Clock Display
 
-A beautiful web-based word clock that displays time using words instead of numbers. The clock is available in both German and Swedish languages.
+A beautiful web-based word clock that displays time using words instead of numbers. The clock is available in German (primary) and Swedish languages.
 
 ## Overview
 
@@ -8,8 +8,8 @@ Qlock is a digital word clock implementation that represents time by highlightin
 
 ## Features
 
-- **Multi-language support**: German and Swedish
-- **Real-time updates**: Clock updates every second (German version) or displays current time (Swedish version)
+- **Multi-language support**: German (primary) and Swedish
+- **Real-time updates**: Clock updates every second with live time display
 - **Mobile-responsive design**: Optimized for various screen sizes
 - **Visual minute indicators**: Corner dots show individual minutes within 5-minute intervals
 - **Clean typography**: Uses Helvetica font for clear readability
@@ -19,8 +19,8 @@ Qlock is a digital word clock implementation that represents time by highlightin
 
 ```
 qlock/
-├── index.html          # Swedish version (primary)
-├── index_de.html       # German version
+├── index.html          # German version (primary)
+├── index_se.html       # Swedish version
 └── img/               # Favicon and app icons
     ├── android-chrome-192x192.png
     ├── android-chrome-512x512.png
@@ -56,14 +56,16 @@ Z E H N E U N K U H R
 
 #### Swedish Grid (11x10):
 ```
-K L O C K A N Ä R F E M
-Y I S T I O N I K V A R T
-Q I E N Z O T J U G O L I
-V I P M Ö V E R K A M H A L V
-E T T U S V L X T V Å T R E
-M Y K Y F Y R A F E M S F L
-O R S E X S J U Ä T T A I N
-I O T I O E L V A T O L V
+K L O C K A N T Ä R K
+F E M Y I S T I O N I
+K V A R T Q I E N Z O 
+T J U G O L I V I P M 
+Ö V E R K A M H A L V
+E T T U S V L X T V Å
+T R E M Y K Y F Y R A
+F E M S F L O R S E X
+S J U Ä T T A I N I O
+T I O E L V A T O L V
 ```
 
 ### Time Calculation Logic
@@ -115,7 +117,7 @@ The four corners show individual minutes within each 5-minute interval:
 
 ### Local Development
 1. Clone or download the project
-2. Open `index.html` (Swedish) or `index_de.html` (German) in a web browser
+2. Open `index.html` (German) or `index_se.html` (Swedish) in a web browser
 3. The clock will display the current time
 
 ### Web Deployment
@@ -131,13 +133,13 @@ The four corners show individual minutes within each 5-minute interval:
 ## Configuration Options
 
 ### Switching Languages
-- Use `index.html` for Swedish
-- Use `index_de.html` for German
-- Main `index.html` has both languages but defaults to Swedish
+- Use `index.html` for German (primary)
+- Use `index_se.html` for Swedish
+- Main `index.html` defaults to German with real-time updates
 
 ### Customizing Updates
-- German version: Updates every 1000ms (real-time)
-- Swedish version: Currently shows static time (interval commented out)
+- German version (`index.html`): Updates every 1000ms (real-time)
+- Swedish version (`index_se.html`): Static time display (interval commented out)
 
 ## Code Structure
 

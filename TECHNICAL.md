@@ -115,7 +115,7 @@ for (let j = 0; j < text.length; j++) {
 
 ## Language-Specific Implementations
 
-### German Version Differences
+### German Version (Primary - `index.html`)
 
 1. **Matrix Structure**: Uses 2D array instead of flattened string
 2. **Hour Logic**: Special handling for "EIN" vs "EINS" at exact hours
@@ -133,7 +133,7 @@ if (minute5 === 0) {
 }
 ```
 
-### Swedish Version Features
+### Swedish Version (`index_se.html`)
 
 1. **Unified Configuration**: Both languages in single `grid` object
 2. **String-based Grid**: Flattened string representation

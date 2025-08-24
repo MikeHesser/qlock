@@ -1,195 +1,172 @@
-<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<meta name="Apple-mobile-web-app-capable" content="no" />
-	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-	<link rel="manifest" href="img/site.webmanifest">
-	<link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="msapplication-TileColor" content="#b91d47">
-	<meta name="theme-color" content="#ffffff">
-	<style>
-		* {
-			font-family: Helvetica;
-		}
-
-		td {
-			text-align: center;
-			vertical-align: middle;
-			width:25px;
-			line-height:25px;
-		}
-
-		table {
-			background-color: #e63946;
-			border-collapse: collapse;
-			padding: 0px;
-			margin: 0px;
-			width:320px;
-		}
-
-		div.centered {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-		}
-
-		td {
-			color: #f66;
-		}
-
-		td.active {
-			color: #fff;
-		}
-	</style>
+<meta charset="utf-8">  
+<style>
+	* {
+		font-family: Helvetica;
+		font-size:28px;
+		
+	}
+	td {
+		text-align: center; 
+		vertical-align: middle;
+	}
+	table {
+		background-color: #e63946;
+		border-collapse: collapse;
+		padding: 0px;
+		margin: 0px;
+	}
+	div.centered {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+	td {
+		width:50px;
+		height:50px;
+		color: #f55;
+	}
+	td.active {
+		color: #fff;
+	}
+</style>
 </head>
-
 <body>
-	<div id="container" class="centered"></div>
+<div id="container" class="centered"></div>
 
-	<script>
-		let grid = {
-			de: {
-				grid: 'ESKISTAFÜNFZEHNZWANZIGDREIVIERTELVORFUNKNACHHALBAELFÜNFEINSXAMZWEIDREIPMJVIERSECHSNLACHTSIEBENZWÖLFZEHNEUNKUHR',
-				hours: ['ZWÖLF', 'EIN', 'ZWEI', 'DREI', 'VIER', 'FÜNF', 'SECHS', 'SIEBEN', 'ACHT', 'NEUN', 'ZEHN', 'ELF'],
-				begin: ['ES', 'IST'],
-				order: [[], ['FÜNF', 'NACH'], ['ZEHN', 'NACH'], ['VIERTEL', 'NACH'], ['TJUGO', 'NACH'], ['FÜNF', 'VOR', 'HALB'], ['HALB'], ['FÜNF', 'NACH', 'HALB'], ['ZEHN', 'VOR'], ['VIERTEL', 'VOR'], ['ZEHN', 'VOR'], ['FÜNF', 'VOR']]
-			},
-			se: {
-				grid: 'KLOCKANTÄRKFEMYISTIONIKVARTQIENZOTJUGOLIVIPMÖVERKAMHALVETTUSVLXTVÅTREMYKYFYRAFEMSFLORSEXSJUÄTTAINIOTIOELVATOLV',
-				hours: ['TOLV', 'ETT', 'TVÅ', 'TRE', 'FYRA', 'FEM', 'SEX', 'SJU', 'ÄTTA', 'NIO', 'TIO', 'ELVA'],
-				begin: ['KLOCKAN', 'ÄR'],
-				order: [[], ['FEM', 'ÖVER'], ['TIO', 'ÖVER'], ['KVART', 'ÖVER'], ['TJUGO', 'ÖVER'], ['FEM', 'I', 'HALV'], ['HALV'], ['FEM', 'ÖVER', 'HALV'], ['TJUGO', 'I'], ['KVART', 'I'], ['TIO', 'I'], ['FEM', 'I']]
+<script>
+let matrix = [
+['E','S','K','I','S','T','A','F','Ü','N','F'],
+['Z','E','H','N','Z','W','A','N','Z','I','G'],
+['D','R','E','I','V','I','E','R','T','E','L'],
+['V','O','R','F','U','N','K','N','A','C','H'],
+['H','A','L','B','A','E','L','F','Ü','N','F'],
+['E','I','N','S','X','A','M','Z','W','E','I'],
+['D','R','E','I','P','M','J','V','I','E','R'],
+['S','E','C','H','S','N','L','A','C','H','T'],
+['S','I','E','B','E','N','Z','W','Ö','L','F'],
+['Z','E','H','N','E','U','N','K','U','H','R']
+]
+
+let trans = {
+	'ES': [0,1],
+	'IST': [3,4,5],
+	'FÜNF': [7,8,9,10],
+	'ZEHN': [11,12,13,14],
+	'ZWANZIG': [15,16,17,18,19,20,21],
+	'DREI': [22,23,24,25],
+	'VIERTEL': [26,27,28,29,30,31,32],
+	'VOR': [33,34,35],
+	'NACH': [40,41,42,43],
+	'HALB': [44,45,46,47],
+	'ELF': [49,50,51],
+	'FÜNF2': [51,52,53,54],
+	'EIN': [55,56,57],
+	'EINS': [55,56,57,58],
+	'ZWEI': [62,63,64,65],
+	'DREI': [66,67,68,69],
+	'VIER': [73,74,75,76],
+	'SECHS': [77,78,79,80,81],
+	'ACHT': [84,85,86,87],
+	'SIEBEN': [88,89,90,91,92,93],
+	'ZWÖLF': [94,95,96,97,98],
+	'ZEHN2': [99,100,101,102],
+	'NEUN': [102,103,104,105],
+	'UHR': [107,108,109]	
+}
+
+
+let hours = [
+	'ZWÖLF', 'EIN', 'ZWEI', 'DREI', 'VIER', 'FÜNF', 'SECHS', 'SIEBEN', 'ACHT', 'NEUN', 'ZEHN', 'ELF'
+]
+
+let order = [
+	[],
+	['FÜNF', 'NACH'],
+	['ZEHN', 'NACH'],
+	['VIERTEL', 'NACH'],
+	['ZWANZIG', 'NACH'],
+	['FÜNF', 'VOR', 'HALB'],
+	['HALB'],
+	['FÜNF', 'NACH', 'HALB'],
+	['ZWANZIG', 'VOR'],
+	['VIERTEL', 'VOR'],
+	['ZEHN', 'VOR'],
+	['FÜNF', 'VOR']
+]
+
+function renderClock() {
+	let map = new Array(10*11)
+	let time = new Date()
+	let hour = time.getHours()
+	let minute5 = Math.floor(time.getMinutes() / 5)
+	let minute = time.getMinutes() % 5
+	if (minute5 > 4) {
+		hour++;
+	}
+	hour = hour % 12
+
+	let text = ['ES','IST']
+	let arr = order[minute5]
+	for (let i = 0; i < arr.length; i++) {
+		text.push(arr[i])
+	}
+	let hourText = hours[hour]
+	if (hourText === 'EIN' && minute5 !== 0) {
+		hourText = 'EINS'
+	}
+	text.push(hourText)
+	if (minute5 === 0) {
+		text.push('UHR')
+	}
+
+	let maxix = 0
+	for (let j = 0; j < text.length; j++) {
+		let array = trans[text[j]]
+		if (array[array.length - 1] <= maxix) {
+			array = trans[text[j] + '2']
+		}
+		for (let i = 0; i < array.length; i++) {
+			let ix = array[i]
+			map[ix] = 1
+			if (maxix < ix) {
+				maxix = ix
 			}
 		}
+	}
 
-		let trans = {
-			'ES': [0, 1],
-			'IST': [3, 4, 5],
-			'FÜNF': [7, 8, 9, 10],
-			'ZEHN': [11, 12, 13, 14],
-			'ZWANZIG': [15, 16, 17, 18, 19, 20, 21],
-			'DREI': [22, 23, 24, 25],
-			'VIERTEL': [26, 27, 28, 29, 30, 31, 32],
-			'VOR': [33, 34, 35],
-			'NACH': [40, 41, 42, 43],
-			'HALB': [44, 45, 46, 47],
-			'ELF': [49, 50, 51],
-			'FÜNF2': [51, 52, 53, 54],
-			'EIN': [55, 56, 57],
-			'EINS': [55, 56, 57, 58],
-			'ZWEI': [62, 63, 64, 65],
-			'DREI': [66, 67, 68, 69],
-			'VIER': [73, 74, 75, 76],
-			'SECHS': [77, 78, 79, 80, 81],
-			'ACHT': [84, 85, 86, 87],
-			'SIEBEN': [88, 89, 90, 91, 92, 93],
-			'ZWÖLF': [94, 95, 96, 97, 98],
-			'ZEHN2': [99, 100, 101, 102],
-			'NEUN': [102, 103, 104, 105],
-			'UHR': [107, 108, 109],
-			'KLOCKAN': [0, 1, 2, 3, 4, 5, 6],
-			'ÄR': [8, 9],
-			'FEM': [11, 12, 13],
-			'I': [21],
-			'I': [15],
-			'I2': [28],
-			'KVART': [22, 23, 24, 25, 26],
-			'ÖVER': [44, 45, 46, 47],
-			'TVÅ': [66, 67, 68],
-			'TRE': [66, 67, 68],
-			'FYRA': [73, 74, 75, 76],
-			'FEM': [11, 12, 13],
-			'FEM2': [77, 78, 79],
-			'SEX': [85, 86, 87],
-			'SJU': [88, 89, 90],
-			'HALV': [51, 52, 53, 54],
-			'ÄTTA': [91, 92, 93, 94],
-			'NIO': [96, 97, 98],
-			'TIO': [17, 18, 19],
-			'TIO2': [99, 100, 101],
-			'ELVA': [102, 103, 104, 105],
-			'TOLV': [106, 107, 108, 109],
-			'TJUGO': [33, 34, 35, 36, 37]
+	let html = ''
+	html += '<table>'
+	html += `<tr><td class="${minute > 0 ? 'active' : ''}">&centerdot;</td>`
+	html += `<td colspan="11"></td>`
+	html += `<td class="${minute > 1 ? 'active' : ''}">&centerdot;</td>`
+	for (let y = 0; y < matrix.length; y++) {
+		let row = matrix[y]
+		html += '<tr>'
+		html += '<td>&nbsp;</td>'
+		for (let x = 0; x < row.length; x++) {
+			let active = map[x + y*11] == 1 ? 'active' : ''
+			let character = matrix[y][x]
+			html += `<td class="${active}">${character}</td>`
 		}
+		html += '<td>&nbsp;</td>'
+		html += '</tr>'
+	}
+	html += `<tr><td class="${minute > 3 ? 'active' : ''}">&centerdot;</td>`
+	html += `<td colspan="11"></td>`
+	html += `<td class="${minute > 2 ? 'active' : ''}">&centerdot;</td>`
+	html += '</table>'
 
-		function renderClock() {
-			let language = 'se'
-			let width = 11
-			let height = 10
-			let map = new Array(height * width)
-			let time = new Date()
-			let hour = time.getHours()
-			let minute5 = Math.floor(time.getMinutes() / 5)
-			let minute = time.getMinutes() % 5
-			if (minute5 > 4) {
-				hour++;
-			}
-			hour = hour % 12
+	return html
+}
 
-			let setting = grid[language]
+setInterval(function() {
+	let html = renderClock()
+	document.getElementById('container').innerHTML = html
+}, 1000)
 
-			let text = JSON.parse(JSON.stringify(setting.begin))
-
-			let arr = setting.order[minute5]
-			for (let i = 0; i < arr.length; i++) {
-				text.push(arr[i])
-			}
-			text.push(setting.hours[hour])
-
-			console.log(JSON.stringify(text))
-			//text.push('UHR')
-
-			let maxix = 0
-			for (let j = 0; j < text.length; j++) {
-				let word = text[j]
-				let ix = setting.grid.indexOf(word, maxix)
-				if (ix === -1) {
-					continue
-				}
-				for (let i = 0; i < word.length; i++) {
-					map[ix + i] = 1
-					if (maxix < ix + i) {
-						maxix = ix + i
-					}
-				}
-			}
-
-			let html = ''
-			html += '<table>'
-			html += `<tr><td class="${minute > 0 ? 'active' : ''}">&centerdot;</td>`
-			html += `<td colspan="${width}"></td>`
-			html += `<td class="${minute > 1 ? 'active' : ''}">&centerdot;</td>`
-			let matrix = setting.grid
-			for (let y = 0; y < height; y++) {
-				html += '<tr>'
-				html += '<td>&nbsp;</td>'
-				for (let x = 0; x < width; x++) {
-					let active = map[x + y * width] == 1 ? 'active' : ''
-					let character = matrix[x + y * width]
-					html += `<td class="${active}">${character}</td>`
-				}
-				html += '<td>&nbsp;</td>'
-				html += '</tr>'
-			}
-			html += `<tr><td class="${minute > 3 ? 'active' : ''}">&centerdot;</td>`
-			html += `<td colspan="${width}"></td>`
-			html += `<td class="${minute > 2 ? 'active' : ''}">&centerdot;</td>`
-			html += '</table>'
-
-			return html
-		}
-
-		//setInterval(function () {
-			let html = renderClock()
-			document.getElementById('container').innerHTML = html
-		//}, 1000)
-
-	</script>
+</script>
 </body>
-
 </html>
