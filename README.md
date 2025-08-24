@@ -1,10 +1,10 @@
-# QClock - Word Clock Display
+# Qlock - Word Clock Display
 
 A beautiful web-based word clock that displays time using words instead of numbers. The clock is available in both German and Swedish languages.
 
 ## Overview
 
-QClock is a digital word clock implementation that represents time by highlighting words in a grid of letters. Instead of showing "3:25", it displays "ES IST FÜNF VOR HALB VIER" (German) or equivalent phrases in Swedish.
+Qlock is a digital word clock implementation that represents time by highlighting words in a grid of letters. Instead of showing "3:25", it displays "ES IST FÜNF VOR HALB VIER" (German) or equivalent phrases in Swedish.
 
 ## Features
 

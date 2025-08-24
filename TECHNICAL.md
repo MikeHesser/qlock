@@ -1,8 +1,8 @@
-# QClock Technical Documentation
+# Qlock Technical Documentation
 
 ## Architecture Overview
 
-QClock uses a client-side JavaScript implementation to render a word-based clock display. The architecture consists of three main components:
+Qlock uses a client-side JavaScript implementation to render a word-based clock display. The architecture consists of three main components:
 
 1. **Language Configuration System**: Defines grid layouts and time expressions
 2. **Time Processing Engine**: Converts current time into word selections
